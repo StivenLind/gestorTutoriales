@@ -67,7 +67,7 @@ public class GestionarTutoriales {
              System.err.println("No se pudo establecer conecion con base de datos");
          }
      }
-     public ArrayList<Tutorial> obtenerTutoriales() throws SQLException{
+     /*public ArrayList<Tutorial> obtenerTutoriales() throws SQLException{
         
         
         Connection con = establecerConexion(); 
@@ -85,14 +85,14 @@ public class GestionarTutoriales {
                 int prioridad = resultSet.getInt("prioridad");
                 String categoria = resultSet.getString("categoria");
 
-                Tutorial tuto = new Tutorial(nombre, url, estado, prioridad, categoria);
+                Tutorial tuto = new Tutorial(prioridad, estado, prioridad, url, prioridad, estado);
                 tutoriales.add(tuto);
             }
 
             con.close();
  
         return tutoriales;
-     }
+     }*/
          public StringBuilder procesarArrayList(ArrayList<Tutorial> tutoriales) {
         // Aquí puedes trabajar con el ArrayList de tutoriales recibido como parámetro
         // Por ejemplo, imprimir los nombres de los tutoriales:
@@ -104,5 +104,33 @@ public class GestionarTutoriales {
         
         return html;
     }
+    
          
+       public List<Tutorial> listarTutoriales() {
+           
+    List<Tutorial> tutoriales = new ArrayList<>();
+    
+    try (Connection conexion = new GestionarTutoriales().establecerConexion()) {
+        conexion.prepareStatement("USE gestor;").execute();
+        String sql = "SELECT * FROM Tutorial";
+        try (PreparedStatement statement = conexion.prepareStatement(sql);
+             ResultSet resultSet = statement.executeQuery()) {
+            while (resultSet.next()) {
+                Tutorial tutorial = new Tutorial();
+                tutorial.setIdTutorial(resultSet.getInt("idTutorial"));
+                tutorial.setTitulo(resultSet.getString("nombre"));
+                tutorial.setUrl(resultSet.getString("url"));
+                tutorial.setEstado(resultSet.getString("estado"));
+                tutorial.setPrioridad(resultSet.getInt("prioridad"));
+                tutorial.setIdCategoria(resultSet.getInt("idcategoria"));
+                tutoriales.add(tutorial);
+            }
+        }
+    } catch (SQLException ex) {
+        System.out.println("Error al listar los tutoriales: " + ex.getMessage());
+    }
+    return tutoriales;
 }
+        
+}
+

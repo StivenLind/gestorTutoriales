@@ -9,18 +9,19 @@ package com.mycompany.gestor_tutoriales;
  * @author Lenovo
  */
 public class Tutorial {
+    int idTutorial;
     String titulo;
-    String categoria;
+    int IdCategoria;
     String url;
     int prioridad;
     String estado;
 
-    public Tutorial(String titulo, String categoria, String url, int prioridad, String estado) {
-        this.titulo = titulo;
-        this.categoria = categoria;
-        this.url = url;
-        this.prioridad = prioridad;
-        this.estado = estado;
+    public int getIdTutorial() {
+        return idTutorial;
+    }
+
+    public void setIdTutorial(int idTutorial) {
+        this.idTutorial = idTutorial;
     }
 
     public String getTitulo() {
@@ -31,12 +32,12 @@ public class Tutorial {
         this.titulo = titulo;
     }
 
-    public String getCategoria() {
-        return categoria;
+    public int getIdCategoria() {
+        return IdCategoria;
     }
 
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
+    public void setIdCategoria(int IdCategoria) {
+        this.IdCategoria = IdCategoria;
     }
 
     public String getUrl() {
@@ -62,6 +63,8 @@ public class Tutorial {
     public void setEstado(String estado) {
         this.estado = estado;
     }
+
+   
 
 
     
