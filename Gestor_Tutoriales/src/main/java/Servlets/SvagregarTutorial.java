@@ -71,7 +71,7 @@ public class SvagregarTutorial extends HttpServlet {
         System.out.println(Prioridad);
         
         int idcategoria = 1 ;
-        
+                
         Connection establecerConexion =gestionar.establecerConexion();
         
         gestionar.AgregarTutorial(Nombre, URL, Estado, Prioridad, idcategoria, establecerConexion);

@@ -3,3 +3,4 @@ com\mycompany\gestor_tutoriales\JAXRSConfiguration.class
 com\mycompany\gestor_tutoriales\resources\JavaEE8Resource.class
 Servlets\SvagregarTutorial.class
 com\mycompany\gestor_tutoriales\Metodos.class
+com\mycompany\gestor_tutoriales\GestorCategoria.class

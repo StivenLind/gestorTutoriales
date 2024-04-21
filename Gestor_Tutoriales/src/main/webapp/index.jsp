@@ -65,12 +65,13 @@
                     <div class="valid-feedback">
                         Looks good!
                     </div>
+                   
                 </div>
                 <div class="col-12">
                     <button class="btn btn-primary" type="submit" href="tabla.jsp">Agregar Tutorial</button>
                 </div>
             </form>   
-            <%@include file="templates/footer.jsp" %> 
+            
 </section>
-        
+<%@include file="templates/footer.jsp" %>     
 </html>
