@@ -24,23 +24,10 @@
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
         <link rel="stylesheet" href="templates/style.css">
-        
-        
-    </head>
+    <%@include file="templates/header.jsp" %>               
+    </head>    
     <body id="page-top">
-        <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
-            <div class="container px-5">
-                <a class="navbar-brand" href="#page-top">Start Bootstrap</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item"><a class="nav-link" href="#!">Sign Up</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#!">Log In</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+             
         <!-- Header-->
         <header class="masthead text-center text-white">
             <div class="masthead-content">
@@ -97,57 +84,10 @@
                     </div>
                 </div>
                 <div class="col-12">
-                    <button class="btn btn-primary" type="submit">Agregar Tutorial</button>
+                    <button class="btn btn-primary" type="submit" href="tabla.jsp">Agregar Tutorial</button>
                 </div>
-            </form >
-            
-                        
-            <center><h2>TUTORIALES DISPONIBLES </h2></center> 
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>Titulo</th>
-                        <th>Categoria</th>
-                        <th>Url</th>
-                        <th>Prioridad</th>
-                        <th>Estado</th>
-                        <th>Opciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                <c:forEach var="tutorial" items="${tutoriales}">
-                    <tr>
-                        <td>${tutorial.titulo}</td>
-                        <td>${tutorial.categoria}</td>
-                        <td>${tutorial.url}</td>
-                        <td>${tutorial.prioridad}</td>
-                        <td>${tutorial.estado}</td>
-                        <td><!-- Opciones --></td>
-                    </tr>
-                </c:forEach>
-                <c:if test="${empty tutoriales}">
-                    <tr>
-                        <td colspan="6" align="center">No se han registrado tutoriales</td>
-                    </tr>
-                </c:if>
-            </tbody>
-            </table>
-
-   
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-
-<script src="./static/js/scripts.js"></script>
-                 
-
-        </section>
-        <!-- Footer-->
-        <footer class="py-5 bg-black">
-            <div class="container px-5"><p class="m-0 text-center text-white small">Copyright &copy; Your Website 2023</p></div>
-        </footer>
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
-    </body>
+            </form>   
+            <%@include file="templates/footer.jsp" %> 
+</section>
+        
 </html>
