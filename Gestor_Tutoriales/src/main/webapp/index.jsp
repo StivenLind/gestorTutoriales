@@ -63,7 +63,7 @@
             <header>
                <center><h1 class="animate__animated directory-title"> AGREGAR UN TUTORIAL </h1></center> 
             </header>
-            <form class="row g-3" method="POST" action="SvagregarTutorial">
+            <form class="row g-3" method="GET" action="SvListar">
                 <div class="col-md-4">
                     <label for="validationServer01" class="form-label">Titulo:</label>
                     <input type="text" class="form-control is-valid" id="validationServer01" name="titulo" required>
@@ -99,7 +99,7 @@
                 <div class="col-12">
                     <button class="btn btn-primary" type="submit">Agregar Tutorial</button>
                 </div>
-            </form>
+            </form >
             
                         
             <center><h2>TUTORIALES DISPONIBLES </h2></center> 
@@ -115,33 +115,31 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Aquí puedes agregar filas con datos de tutoriales -->
+                <c:forEach var="tutorial" items="${tutoriales}">
                     <tr>
-                        <% 
-                         GestionarTutoriales tutorial = new GestionarTutoriales();
-                         Connection con = tutorial.establecerConexion();
-                         
-                         ArrayList<Tutorial> tutoriales = new ArrayList<>();
-                         
-                         tutoriales = tutorial.obtenerTutoriales();
-                         
-                         StringBuilder html = tutorial.procesarArrayList(tutoriales);
-                         
-                         out.println(html);
-                         
-                        %>
-                        <td colspan="5" align="center" valign="middle">No se han registrado tutoriales</td>
+                        <td>${tutorial.titulo}</td>
+                        <td>${tutorial.categoria}</td>
+                        <td>${tutorial.url}</td>
+                        <td>${tutorial.prioridad}</td>
+                        <td>${tutorial.estado}</td>
+                        <td><!-- Opciones --></td>
                     </tr>
-                </tbody>
+                </c:forEach>
+                <c:if test="${empty tutoriales}">
+                    <tr>
+                        <td colspan="6" align="center">No se han registrado tutoriales</td>
+                    </tr>
+                </c:if>
+            </tbody>
             </table>
-        </div>
-    </div>
-</div>
+
+   
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
 <script src="./static/js/scripts.js"></script>
-</div>                  
-</div>
+                 
+
         </section>
         <!-- Footer-->
         <footer class="py-5 bg-black">

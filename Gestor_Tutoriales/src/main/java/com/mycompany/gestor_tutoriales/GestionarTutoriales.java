@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -22,9 +23,9 @@ public class GestionarTutoriales {
     
      public Connection establecerConexion(){
                 
-              String url = "jdbc:mysql://localhost:3306/?serverTimeZone=utc";
+        String url = "jdbc:mysql://localhost:3306/?serverTimeZone=utc";
         String user = "root";
-        String password = "Neider2003";
+        String password = "1085250701";
         Connection conn = null;
         
         try {
@@ -103,4 +104,5 @@ public class GestionarTutoriales {
         
         return html;
     }
+         
 }

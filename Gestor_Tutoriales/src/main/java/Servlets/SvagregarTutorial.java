@@ -5,6 +5,7 @@
 package Servlets;
 
 import com.mycompany.gestor_tutoriales.GestionarTutoriales;
+import com.mycompany.gestor_tutoriales.Tutorial;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -41,6 +42,9 @@ public class SvagregarTutorial extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+    
+    
+    
         
     }
 
