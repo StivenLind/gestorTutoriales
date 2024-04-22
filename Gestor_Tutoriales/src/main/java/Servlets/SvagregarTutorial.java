@@ -65,16 +65,15 @@ public class SvagregarTutorial extends HttpServlet {
         String Nombre = request.getParameter("titulo");
         String URL = request.getParameter("url");
         String Estado = request.getParameter("estado");
-        
-        
+               
         int Prioridad = Integer.parseInt(request.getParameter("prioridad"));
         System.out.println(Prioridad);
         
-        int idcategoria = 1 ;
+        int Idcategoria = Integer.parseInt(request.getParameter("Categoria"));
                 
         Connection establecerConexion =gestionar.establecerConexion();
         
-        gestionar.AgregarTutorial(Nombre, URL, Estado, Prioridad, idcategoria, establecerConexion);
+        gestionar.AgregarTutorial(Nombre, URL, Estado, Prioridad, Idcategoria, establecerConexion);
         response.sendRedirect("index.jsp");
         
     }

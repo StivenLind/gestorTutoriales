@@ -10,6 +10,7 @@ package com.mycompany.gestor_tutoriales;
  */
 public class Tutorial {
     int idTutorial;
+    String nombreCategoria;
     String titulo;
     int IdCategoria;
     String url;

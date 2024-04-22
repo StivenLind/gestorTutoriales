@@ -41,18 +41,22 @@ public class GestorCategoria {
     List<Categoria> categorias = new ArrayList<>();
     try (Connection conexion = new GestionarTutoriales().establecerConexion()) {
         conexion.prepareStatement("USE gestor;").execute();
-        String sql = "SELECT categoria FROM categorias";
+        String sql = "SELECT * FROM categorias";
         try (PreparedStatement statement = conexion.prepareStatement(sql);
              ResultSet resultSet = statement.executeQuery()) {
             while (resultSet.next()) {
-                categorias.add(resultSet.setCategoria("categoria"));
+                Categoria categoria = new Categoria();
+                categoria.setIdCategoria(resultSet.getInt("IdCategoria"));
+                categoria.setNombreCategoria(resultSet.getString("Categoria"));
+                categorias.add(categoria);
             }
         }
     } catch (SQLException ex) {
         System.out.println("Error al listar las categorías: " + ex.getMessage());
     }
-    return categorias;
+        return categorias;   
 }
+     
 }
 
 

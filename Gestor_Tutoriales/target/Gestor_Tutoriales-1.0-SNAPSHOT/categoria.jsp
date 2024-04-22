@@ -5,14 +5,32 @@
 --%>
 <%@include file="templates/header.jsp" %>  
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <h1>Hello World!</h1>
-    </body>
-    <%@include file="templates/footer.jsp" %> 
+    
+<head>
+    <h1>.</h1>
+    <h1>°</h1>
+    <link rel="stylesheet" href="templates/styleC.css">
+    <meta charset="UTF-8">
+    <title>Agregar Categoría</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+
+<div class="container">
+    <h2>Agregar Nueva Categoría</h2>
+    <form action="AgregarCategoriaServlet" method="post">
+        <div class="form-group">
+            <label for="categoria">Nombre de la Categoría:</label>
+            <input type="text" id="categoria" name="categoria" required>
+        </div>
+        <button type="submit" class="btn">Agregar Categoría</button>
+    </form>
+</div>
+
+</body>
 </html>
+<%@include file="templates/footer.jsp" %> 
+

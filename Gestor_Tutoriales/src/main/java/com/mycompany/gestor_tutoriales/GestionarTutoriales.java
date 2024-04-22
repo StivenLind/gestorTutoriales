@@ -132,5 +132,26 @@ public class GestionarTutoriales {
     return tutoriales;
 }
      
+       public String obtenerNombreCategoriaPorId(int idCategoria) {
+        String nombreCategoria = "";
+    String sql = "SELECT categoria FROM categorias WHERE idcategoria = ?";
+
+    try (Connection conexion = new GestionarTutoriales().establecerConexion(); 
+        
+         PreparedStatement pstmt = conexion.prepareStatement(sql)) {
+        conexion.prepareStatement("USE gestor;").execute();
+        
+        pstmt.setInt(1, idCategoria);
+        try (ResultSet rs = pstmt.executeQuery()) {
+            if (rs.next()) {
+                nombreCategoria = rs.getString("categoria");
+            }
+        }
+    } catch (SQLException ex) {
+        System.out.println("Error al obtener el nombre de la categoría: " + ex.getMessage());
+    }
+
+    return nombreCategoria;
+    }
 }
 

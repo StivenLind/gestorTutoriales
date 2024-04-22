@@ -22,8 +22,7 @@
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
         <link rel="stylesheet" href="templates/style.css">
-         <h1>.</h1>
-         <h1>°</h1>     
+            
     </head>
  
     <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
