@@ -77,43 +77,24 @@ public class SvEditarTutorial extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Asumiendo que también tienes parámetros como 'titulo', 'url', etc.
+        response.setContentType("text/html;charset=UTF-8");
+
+        // Obtener los parámetros del formulario de edición
+        int idTutorial = Integer.parseInt(request.getParameter("idTutorial"));
         String titulo = request.getParameter("titulo");
         String url = request.getParameter("url");
         String estado = request.getParameter("estado");
-        String prioridadStr = request.getParameter("prioridad");
-        String categoriaIdStr = request.getParameter("Categoria");
-        String tutorialIdStr = request.getParameter("tutorialId"); // Asumiendo que tienes un campo oculto para el ID en el formulario
+        int prioridad = Integer.parseInt(request.getParameter("prioridad"));
+        int categoriaId = Integer.parseInt(request.getParameter("Categoria"));
 
-        // Validar que los parámetros necesarios no son nulos o vacíos
-        if (titulo == null || url == null || estado == null || prioridadStr == null || categoriaIdStr == null || tutorialIdStr == null ||
-            titulo.isEmpty() || url.isEmpty() || estado.isEmpty() || prioridadStr.isEmpty() || categoriaIdStr.isEmpty() || tutorialIdStr.isEmpty()) {
-            request.setAttribute("error", "Todos los campos son obligatorios.");
-            request.getRequestDispatcher("/error.jsp").forward(request, response);
-            return;
-        }
+        // Llamar al método actualizarTutorial del controlador
+        GestionarTutoriales gestionarTutoriales = new GestionarTutoriales();
+        boolean actualizado = gestionarTutoriales.actualizarTutorial(idTutorial, titulo, url, estado, prioridad, categoriaId);
 
-        try {
-            int prioridad = Integer.parseInt(prioridadStr);
-            int categoriaId = Integer.parseInt(categoriaIdStr);
-            int tutorialId = Integer.parseInt(tutorialIdStr);
-
-            // Asumiendo que tienes una clase para gestionar los tutoriales
-            GestionarTutoriales gestionarTutoriales = new GestionarTutoriales();
-            boolean resultado = gestionarTutoriales.actualizarTutorial(tutorialId, titulo, url, estado, prioridad, categoriaId);
-
-            if (resultado) {
-                response.sendRedirect("tabla.jsp");
-            } else {
-                request.setAttribute("error", "No se pudo actualizar el tutorial.");
-                request.getRequestDispatcher("/error.jsp").forward(request, response);
-            }
-
-        } catch (NumberFormatException e) {
-            request.setAttribute("error", "La prioridad, categoría y ID del tutorial deben ser números válidos.");
-           
-        } catch (Exception e) {
-            request.setAttribute("error", "Error al actualizar el tutorial: " + e.getMessage());       
+        if (actualizado) {
+            response.getWriter().write("Tutorial actualizado correctamente.");
+        } else {
+            response.getWriter().write("No se pudo actualizar el tutorial.");
         }
     }
 
