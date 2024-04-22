@@ -3,6 +3,9 @@
     Created on : 12/04/2024, 8:02:44 a. m.
     Author     : Lenovo
 --%>
+<%@page import="com.mycompany.gestor_tutoriales.Categoria"%>
+<%@page import="com.mycompany.gestor_tutoriales.GestorCategoria"%>
+<%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.mycompany.gestor_tutoriales.Tutorial"%>
 <%@page import="com.mycompany.gestor_tutoriales.GestionarTutoriales"%>
@@ -10,6 +13,9 @@
 <%@include file="templates/header.jsp" %>     
 <!DOCTYPE html>
 <html lang="en">  
+    <%GestorCategoria conexion = new GestorCategoria();
+    List<Categoria> categorias = conexion.listarCategorias();
+    %>
     <body id="page-top">           
         <!-- Header-->
         <header class="masthead text-center text-white">
@@ -65,7 +71,18 @@
                     <div class="valid-feedback">
                         Looks good!
                     </div>
-                   
+                   <div class="col-md-4">
+                    <label for="validationServer05" class="form-label">Estado:</label>
+                    <select class="form-select" id="categoriaEdit" name="categoriaEdit" placeholder="Categoria">
+                                <option value="" hidden>Categoria</option>
+                               
+                                <% for (Categoria categoria : categorias) {%>
+                                <option value="<%= categoria.getIdCategoria()%>"><%= categoria.getCategoria()%></option>
+                                <% }%>
+                            </select>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
                 </div>
                 <div class="col-12">
                     <button class="btn btn-primary" type="submit" href="tabla.jsp">Agregar Tutorial</button>

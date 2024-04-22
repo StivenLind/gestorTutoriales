@@ -6,7 +6,11 @@ package com.mycompany.gestor_tutoriales;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -33,6 +37,22 @@ public class GestorCategoria {
             System.out.println("Error al agregar la categoría: " + e.getMessage());
         }
     }
+    public List<Categoria> listarCategorias() {
+    List<Categoria> categorias = new ArrayList<>();
+    try (Connection conexion = new GestionarTutoriales().establecerConexion()) {
+        conexion.prepareStatement("USE gestor;").execute();
+        String sql = "SELECT categoria FROM categorias";
+        try (PreparedStatement statement = conexion.prepareStatement(sql);
+             ResultSet resultSet = statement.executeQuery()) {
+            while (resultSet.next()) {
+                categorias.add(resultSet.setCategoria("categoria"));
+            }
+        }
+    } catch (SQLException ex) {
+        System.out.println("Error al listar las categorías: " + ex.getMessage());
+    }
+    return categorias;
+}
 }
 
 
