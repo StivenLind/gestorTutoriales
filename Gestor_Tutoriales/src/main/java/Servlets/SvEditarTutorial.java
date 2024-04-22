@@ -8,6 +8,9 @@ import com.mycompany.gestor_tutoriales.GestionarTutoriales;
 import com.mycompany.gestor_tutoriales.Tutorial;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -73,9 +76,49 @@ public class SvEditarTutorial extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
-        
+        // Asumiendo que también tienes parámetros como 'titulo', 'url', etc.
+        String titulo = request.getParameter("titulo");
+        String url = request.getParameter("url");
+        String estado = request.getParameter("estado");
+        String prioridadStr = request.getParameter("prioridad");
+        String categoriaIdStr = request.getParameter("Categoria");
+        String tutorialIdStr = request.getParameter("tutorialId"); // Asumiendo que tienes un campo oculto para el ID en el formulario
+
+        // Validar que los parámetros necesarios no son nulos o vacíos
+        if (titulo == null || url == null || estado == null || prioridadStr == null || categoriaIdStr == null || tutorialIdStr == null ||
+            titulo.isEmpty() || url.isEmpty() || estado.isEmpty() || prioridadStr.isEmpty() || categoriaIdStr.isEmpty() || tutorialIdStr.isEmpty()) {
+            request.setAttribute("error", "Todos los campos son obligatorios.");
+            request.getRequestDispatcher("/error.jsp").forward(request, response);
+            return;
+        }
+
+        try {
+            int prioridad = Integer.parseInt(prioridadStr);
+            int categoriaId = Integer.parseInt(categoriaIdStr);
+            int tutorialId = Integer.parseInt(tutorialIdStr);
+
+            // Asumiendo que tienes una clase para gestionar los tutoriales
+            GestionarTutoriales gestionarTutoriales = new GestionarTutoriales();
+            boolean resultado = gestionarTutoriales.actualizarTutorial(tutorialId, url, url, estado, prioridad, categoriaId);
+
+            if (resultado) {
+                response.sendRedirect("listaTutoriales.jsp");
+            } else {
+                request.setAttribute("error", "No se pudo actualizar el tutorial.");
+                request.getRequestDispatcher("/error.jsp").forward(request, response);
+            }
+
+        } catch (NumberFormatException e) {
+            request.setAttribute("error", "La prioridad, categoría y ID del tutorial deben ser números válidos.");
+            request.getRequestDispatcher("/error.jsp").forward(request, response);
+        } catch (Exception e) {
+            request.setAttribute("error", "Error al actualizar el tutorial: " + e.getMessage());
+            request.getRequestDispatcher("/error.jsp").forward(request, response);
+        }
     }
+
+
+    
 
     /**
      * Returns a short description of the servlet.

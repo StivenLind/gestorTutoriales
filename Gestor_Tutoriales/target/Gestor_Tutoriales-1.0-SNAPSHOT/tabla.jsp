@@ -133,28 +133,7 @@
   </div>
 </div>
 
-<script>
-$(document).ready(function() {
-    $('.btn-outline-primary').on('click', function() {
-        var tutorialId = $(this).data('id');
-        // Aquí puedes hacer una llamada AJAX para obtener los datos del tutorial o usar datos ya disponibles en la página
-        $.ajax({
-            url: 'GetTutorialServlet', // Servlet que devuelve los datos del tutorial
-            type: 'GET',
-            data: {id: tutorialId},
-            success: function(tutorial) {
-                $('#validationServer01').val(tutorial.titulo);
-                $('#validationServer03').val(tutorial.url);
-                $('#validationServer04').val(tutorial.prioridad);
-                $('#validationServer05').val(tutorial.estado);
-                $('#Categoria').val(tutorial.categoriaId);
-                // Configura la acción del formulario para actualizar
-                $('form').attr('action', 'SvEditarTutorial?id=' + tutorialId);
-            }
-        });
-    });
-});
-</script>
+
 
     <%@include file="templates/footer.jsp" %> 
 </html>
