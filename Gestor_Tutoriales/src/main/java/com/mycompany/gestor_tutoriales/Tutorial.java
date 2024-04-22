@@ -17,6 +17,7 @@ public class Tutorial {
     int prioridad;
     String estado;
 
+
     public int getIdTutorial() {
         return idTutorial;
     }

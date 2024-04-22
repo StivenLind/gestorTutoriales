@@ -153,5 +153,27 @@ public class GestionarTutoriales {
 
     return nombreCategoria;
     }
+       public void actualizarTutorial(Tutorial tutorial) {
+        // Aquí debes implementar la lógica para actualizar el tutorial en la base de datos
+        // Por ejemplo, podrías usar una conexión a la base de datos para ejecutar una consulta SQL UPDATE
+        
+        try (Connection connection = new GestionarTutoriales().establecerConexion();
+             PreparedStatement statement = connection.prepareStatement("UPDATE Tutorial SET titulo=?, url=?, prioridad=?, estado=?, idcategoria=? WHERE idTutorial=?")) {
+            statement.setString(1, tutorial.getTitulo());
+            statement.setString(2, tutorial.getUrl());
+            statement.setInt(3, tutorial.getPrioridad());
+            statement.setString(4, tutorial.getEstado());
+            statement.setInt(5, tutorial.getIdCategoria());
+            statement.setInt(6, tutorial.getIdTutorial());
+
+            int filasActualizadas = statement.executeUpdate();
+            if (filasActualizadas != 1) {
+                throw new SQLException("No se pudo actualizar el tutorial.");
+            }
+        } catch (SQLException ex) {
+            // Manejo de errores
+            ex.printStackTrace();
+        }
+    }
 }
 
