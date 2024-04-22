@@ -5,6 +5,7 @@
 package Servlets;
 
 import com.mycompany.gestor_tutoriales.GestionarTutoriales;
+import com.mycompany.gestor_tutoriales.GestorCategoria;
 import com.mycompany.gestor_tutoriales.Tutorial;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -99,10 +100,10 @@ public class SvEditarTutorial extends HttpServlet {
 
             // Asumiendo que tienes una clase para gestionar los tutoriales
             GestionarTutoriales gestionarTutoriales = new GestionarTutoriales();
-            boolean resultado = gestionarTutoriales.actualizarTutorial(tutorialId, url, url, estado, prioridad, categoriaId);
+            boolean resultado = gestionarTutoriales.actualizarTutorial(tutorialId, titulo, url, estado, prioridad, categoriaId);
 
             if (resultado) {
-                response.sendRedirect("listaTutoriales.jsp");
+                response.sendRedirect("tabla.jsp");
             } else {
                 request.setAttribute("error", "No se pudo actualizar el tutorial.");
                 request.getRequestDispatcher("/error.jsp").forward(request, response);
@@ -110,10 +111,9 @@ public class SvEditarTutorial extends HttpServlet {
 
         } catch (NumberFormatException e) {
             request.setAttribute("error", "La prioridad, categoría y ID del tutorial deben ser números válidos.");
-            request.getRequestDispatcher("/error.jsp").forward(request, response);
+           
         } catch (Exception e) {
-            request.setAttribute("error", "Error al actualizar el tutorial: " + e.getMessage());
-            request.getRequestDispatcher("/error.jsp").forward(request, response);
+            request.setAttribute("error", "Error al actualizar el tutorial: " + e.getMessage());       
         }
     }
 

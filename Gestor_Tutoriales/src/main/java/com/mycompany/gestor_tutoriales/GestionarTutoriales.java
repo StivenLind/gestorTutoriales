@@ -154,22 +154,79 @@ public class GestionarTutoriales {
     return nombreCategoria;
     }
        
-       public void actualizarTutorial(int idTutorial, String nombre, String url, String estado, int prioridad, int idcategoria) {
-    try (Connection conn = establecerConexion()) {
-        conn.prepareStatement("USE gestor;").execute();
-        try (CallableStatement stmt = conn.prepareCall("{CALL EditarTutorial(?, ?, ?, ?, ?, ?)}")) {
-            stmt.setInt(1, idTutorial);
-            stmt.setString(2, nombre);
-            stmt.setString(3, url);
-            stmt.setString(4, estado);
-            stmt.setInt(5, prioridad);
-            stmt.setInt(6, idcategoria);
-            stmt.execute();
-            System.out.println("Tutorial actualizado con éxito");
-        }
+      public boolean actualizarTutorial(int idTutorial, String titulo, String url, String estado, int prioridad, int categoriaId) {
+    try (Connection conexion = establecerConexion()) {
+        conexion.prepareStatement("USE gestor;").execute();
+
+        CallableStatement stmt = conexion.prepareCall("{call EditarTutorial(?, ?, ?, ?, ?, ?)}");
+        stmt.setInt(1, idTutorial);
+        stmt.setString(2, titulo);
+        stmt.setString(3, url);
+        stmt.setString(4, estado);
+        stmt.setInt(5, prioridad);
+        stmt.setInt(6, categoriaId);
+
+        return stmt.executeUpdate() > 0; // Si se actualizó al menos una fila, retorna true
     } catch (SQLException e) {
         System.err.println("Error al actualizar el tutorial: " + e.getMessage());
+        return false; // Indica que no se pudo actualizar el tutorial
     }
 }
+     /*public boolean eliminarTutorial(int idTutorial) {
+    try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/gestor", "root", "1085250701")) {
+        try (CallableStatement statement = connection.prepareCall("{call EliminarTutorial(?)}")) {
+            statement.setInt(1, idTutorial);
+            statement.executeUpdate();
+            return true; // Si la eliminación fue exitosa
+        } catch (SQLException e) {
+            System.err.println("Error al ejecutar el procedimiento almacenado: " + e.getMessage());
+            return false; // Si hubo un error durante la eliminación
+        }
+    } catch (SQLException e) {
+        System.err.println("Error al conectar con la base de datos: " + e.getMessage());
+        return false; // Si hubo un error de conexión
+    }
+}*/
+      public boolean eliminarTutorial(int idTutorial) {
+    try (Connection conexion = establecerConexion()) {
+        conexion.prepareStatement("USE gestor;").execute(); // Asegura que la base de datos correcta está en uso
+
+        CallableStatement stmt = conexion.prepareCall("{call EliminarTutorial(?)}");
+        stmt.setInt(1, idTutorial);
+
+        int resultado = stmt.executeUpdate(); // Ejecuta la llamada y obtiene el resultado
+        if (resultado > 0) {
+            System.out.println("Tutorial eliminado correctamente.");
+            return true; // Si la eliminación fue exitosa
+        } else {
+            System.out.println("No se encontró un tutorial para eliminar con el ID proporcionado.");
+            return false; // Si no se eliminó ningún registro
+        }
+    } catch (SQLException e) {
+        System.err.println("Error al eliminar el tutorial: " + e.getMessage());
+        return false; // Indica que no se pudo eliminar el tutorial
+    }
+}
+      public boolean eliminarCategoria(int idCategoria) {
+        try (Connection conexion = establecerConexion()) {
+            conexion.prepareStatement("USE gestor;").execute(); // Asegura que la base de datos correcta está en uso
+
+            CallableStatement stmt = conexion.prepareCall("{call EliminarCategoria(?)}");
+            stmt.setInt(1, idCategoria);
+
+            int resultado = stmt.executeUpdate(); // Ejecuta el procedimiento almacenado y obtiene el resultado
+            if (resultado > 0) {
+                System.out.println("Categoría eliminada correctamente.");
+                return true; // Si la eliminación fue exitosa
+            } else {
+                System.out.println("No se encontró una categoría para eliminar con el ID proporcionado.");
+                return false; // Si no se eliminó ninguna categoría
+            }
+        } catch (SQLException e) {
+            System.err.println("Error al eliminar la categoría: " + e.getMessage());
+            return false; // Indica que no se pudo eliminar la categoría
+        }
+    }
+
 }
 

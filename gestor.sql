@@ -42,3 +42,56 @@ BEGIN
 END //
 
 DELIMITER ;
+
+DELIMITER //
+
+	CREATE PROCEDURE AgregarCategoria(
+    IN p_Categoria VARCHAR(50)
+)
+	BEGIN
+    DECLARE categoria_existente INT;
+
+    -- Verificar si la categoría ya existe
+    SELECT COUNT(*) INTO categoria_existente FROM Categorias WHERE Categoria = p_Categoria;
+
+    -- Si la categoría no existe, la agregamos
+    IF categoria_existente = 0 THEN
+        INSERT INTO Categorias(Categoria) VALUES (p_Categoria);
+        SELECT 'Categoría agregada exitosamente' AS mensaje;
+    ELSE
+        SELECT 'La categoría ya existe' AS mensaje;
+    END IF;
+END //	
+DELIMITER ;
+DELIMITER //
+
+CREATE PROCEDURE EditarTutorial(
+    IN p_idTutorial INT,
+    IN p_nombre VARCHAR(150),
+    IN p_url TEXT,
+    IN p_estado VARCHAR(150),
+    IN p_prioridad INT,
+    IN p_idcategoria INT
+)
+BEGIN
+    UPDATE Tutorial
+    SET nombre = p_nombre,
+        url = p_url,
+        estado = p_estado,
+        prioridad = p_prioridad,
+        idcategoria = p_idcategoria
+    WHERE idTutorial = p_idTutorial;
+END //
+
+DELIMITER ;
+
+DELIMITER //
+
+CREATE PROCEDURE EliminarTutorial(
+    IN p_idTutorial INT
+)
+BEGIN
+    DELETE FROM Tutorial WHERE idTutorial = p_idTutorial;
+END //
+
+DELIMITER ;

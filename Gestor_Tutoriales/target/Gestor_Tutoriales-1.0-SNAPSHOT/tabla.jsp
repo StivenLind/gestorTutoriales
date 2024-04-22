@@ -50,9 +50,9 @@
                     <a href="#" type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editarModal" data-nombre="<%= tutorial.getIdTutorial()%>">
                         <i class="fa-solid fa-pencil"></i>
                     </a>
-                    <a href="#" type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#eliminarTareaModal" data-nombre="<%= tutorial.getIdTutorial()%>">
-                        <i class="fa-solid fa-trash"></i>
-                    </a>
+                   <a href="#" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#eliminarTareaModal" data-id="<%= tutorial.getIdTutorial() %>">
+                   <i class="fa-solid fa-trash"></i>
+                   </a>
                 </td>
             </tr>
             <% } %>
@@ -125,15 +125,49 @@
                 <button class="btn btn-primary" type="submit">Agregar Tutorial</button>
             </div>
         </form> 
+     
+    
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-      </div>
+      
     </div>
   </div>
 </div>
+                
+  <div class="modal fade" id="eliminarTareaModal" tabindex="-1" aria-labelledby="eliminarTareaModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="eliminarTareaModalLabel">Confirmar eliminación</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ¿Estás seguro de que quieres eliminar este tutorial?
+                <form id="eliminarForm" action="SvEliminarTutorial" method="POST">
+                            <input type="hidden" id="eliminar" name="nEliminar">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <!-- Botón para eliminar con JavaScript -->
+                <button type="button" class="btn btn-danger" onclick="eliminarTutorial()">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+            $('#eliminarTareaModal').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget); // Botón que desencadenó el evento
+                var idTutorial = button.data('id'); // Obtén el nombre del contacto desde data-nombre
 
+                // Establecer el valor del campo oculto con el nombre del contacto
+                $('#eliminar').val(idTutorial);
+            });
+        </script>   
 
-
+        <script>
+            function eliminarTutorial() {
+                $('#eliminarForm').submit(); // Enviar el formulario al servlet
+            }
+        </script>
     <%@include file="templates/footer.jsp" %> 
 </html>

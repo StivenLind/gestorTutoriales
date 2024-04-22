@@ -4,14 +4,9 @@
  */
 package Servlets;
 
+import com.mycompany.gestor_tutoriales.GestionarTutoriales;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,8 +17,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author cuati
  */
-@WebServlet(name = "AgregarCategoriaServlet", urlPatterns = {"/AgregarCategoriaServlet"})
-public class AgregarCategoriaServlet extends HttpServlet {
+@WebServlet(name = "SvEliminarTutorial", urlPatterns = {"/SvEliminarTutorial"})
+public class SvEliminarTutorial extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,17 +32,18 @@ public class AgregarCategoriaServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet AgregarCategoriaServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet AgregarCategoriaServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        
+        // Obtener el ID del tutorial de la solicitud
+        int idTutorial = Integer.parseInt(request.getParameter("idTutorial"));
+        
+        // Llamar al método eliminarTutorial del controlador
+        GestionarTutoriales gestionarTutoriales = new GestionarTutoriales();
+        boolean eliminado = gestionarTutoriales.eliminarTutorial(idTutorial);
+        
+        if (eliminado) {
+            response.getWriter().write("Tutorial eliminado correctamente.");
+        } else {
+            response.getWriter().write("No se pudo eliminar el tutorial.");
         }
     }
 
@@ -77,22 +73,22 @@ public class AgregarCategoriaServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String categoria = request.getParameter("categoria");
-
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/gestor", "root", "1085250701")) {
-            String sql = "INSERT INTO categorias (categoria) VALUES (?)";
-            try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-                stmt.setString(1, categoria);
-                stmt.executeUpdate();
-                response.sendRedirect("categoria.jsp"); // Redirigir a la lista de categorías
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            response.sendRedirect("error.jsp"); // Redirigir a la página de error
-        }
+          // Obtener el ID del tutorial de la solicitud
+    int idTutorial = Integer.parseInt(request.getParameter("nEliminar"));
+    System.out.println("ID del tutorial a eliminar: " + idTutorial);
     
+    // Llamar al método eliminarTutorial del controlador
+    GestionarTutoriales gestionarTutoriales = new GestionarTutoriales();
+    boolean eliminado = gestionarTutoriales.eliminarTutorial(idTutorial);
+    
+    if (eliminado) {
+        response.getWriter().write("Tutorial eliminado correctamente.");
+    } else {
+        response.getWriter().write("No se pudo eliminar el tutorial.");
+        
     }
-
+    response.sendRedirect("tabla.jsp");
+    }       
     /**
      * Returns a short description of the servlet.
      *
