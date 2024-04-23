@@ -95,3 +95,16 @@ BEGIN
 END //
 
 DELIMITER ;
+
+DELIMITER //
+
+CREATE PROCEDURE EliminarCategoria(IN p_idcategoria INT)
+BEGIN
+    -- Eliminar todos los tutoriales asociados a la categoría
+    DELETE FROM Tutorial WHERE idcategoria = p_idcategoria;
+    -- Ahora eliminar la categoría
+    DELETE FROM categorias WHERE idcategoria = p_idcategoria;
+    SELECT 'Categoría y tutoriales eliminados exitosamente' AS mensaje;
+END //
+
+DELIMITER ;
