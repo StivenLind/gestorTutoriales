@@ -16,21 +16,20 @@
     <%GestorCategoria conexion = new GestorCategoria();
         List<Categoria> categorias = conexion.listarCategorias();
     %>
+    <h1>.</h1>
+    <h1></h1>
     <body id="page-top">           
         <!-- Header-->
-        <header class="masthead text-center text-white">
-            <div class="masthead-content">
-                <div class="container px-5">
-                    <h1 class="masthead-heading mb-0">GESTOR DE TUTORIALES </h1>
-                    <h2 class="masthead-subheading mb-0">Bienbenido al gestor de tutoriales </h2>
-                    <a class="btn btn-primary btn-xl rounded-pill mt-5" href="#scroll">Learn More</a>
+        <header class="masthead">
+            <div class="container px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
+                <div class="d-flex justify-content-center">
+                    <div class="text-center">
+                        <h1 class="mx-auto my-0 text-uppercase">AGREGAR UN TUTORIAL</h1>
+                        
+                        
+                    </div>
                 </div>
             </div>
-            <div class="bg-circle-1 bg-circle"></div>
-            <div class="bg-circle-2 bg-circle"></div>
-            <div class="bg-circle-3 bg-circle"></div>
-            <div class="bg-circle-4 bg-circle"></div>
-            
         </header>
         <!-- Content section 1-->
 
@@ -95,5 +94,5 @@
         </form>  
 
     </section>
-    <%@include file="templates/footer.jsp" %>     
+      
 </html>

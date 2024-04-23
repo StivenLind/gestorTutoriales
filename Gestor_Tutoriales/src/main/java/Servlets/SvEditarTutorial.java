@@ -80,7 +80,7 @@ public class SvEditarTutorial extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
         // Obtener los parámetros del formulario de edición
-        int idTutorial = Integer.parseInt(request.getParameter("idTutorial"));
+        int idTutorial = Integer.parseInt(request.getParameter("nombre"));
         String titulo = request.getParameter("titulo");
         String url = request.getParameter("url");
         String estado = request.getParameter("estado");
@@ -96,6 +96,7 @@ public class SvEditarTutorial extends HttpServlet {
         } else {
             response.getWriter().write("No se pudo actualizar el tutorial.");
         }
+         response.sendRedirect("tabla.jsp");
     }
 
 

@@ -14,7 +14,7 @@
 <!DOCTYPE html>
 <html>
     <h1>.</h1>
-    <h1>°</h1>
+
     <body>
         <%
             GestionarTutoriales gestorTuto = new GestionarTutoriales();
@@ -26,7 +26,6 @@
             <table class="table">
                 <thead>
                 <th scope="col">Titulo</th>
-                <th scope="col">URL</th>
                 <th scope="col">Prioridad</th>
                 <th scope="col">Estado</th>
                 <th scope="col">Categoría</th>
@@ -36,7 +35,6 @@
                     <% for (Tutorial tutorial : tutoriales) {%>
                     <tr>
                         <td><%= tutorial.getTitulo()%></td>
-                        <td><%= tutorial.getUrl()%></td>
                         <td><%= tutorial.getPrioridad()%></td>
                         <td><%= tutorial.getEstado()%></td>
                         <%

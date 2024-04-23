@@ -79,7 +79,7 @@ public class AgregarCategoriaServlet extends HttpServlet {
             throws ServletException, IOException {
         String categoria = request.getParameter("categoria");
 
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/gestor", "root", "1085250701")) {
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/gestor", "root", "Neider2003")) {
             String sql = "INSERT INTO categorias (categoria) VALUES (?)";
             try (PreparedStatement stmt = conn.prepareStatement(sql)) {
                 stmt.setString(1, categoria);
