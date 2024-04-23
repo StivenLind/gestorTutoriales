@@ -25,7 +25,7 @@ public class GestionarTutoriales {
 
         String url = "jdbc:mysql://localhost:3306/?serverTimeZone=utc";
         String user = "root";
-        String password = "Neider2003";
+        String password = "1085250701";
         Connection conn = null;
 
         try {

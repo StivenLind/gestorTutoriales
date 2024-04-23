@@ -1,10 +1,11 @@
+com\mycompany\gestor_tutoriales\GestionarTutoriales.class
+Servlets\SvEliminarCategoria.class
 com\mycompany\gestor_tutoriales\JAXRSConfiguration.class
 Servlets\SvEliminarTutorial.class
 Servlets\AgregarCategoriaServlet.class
 com\mycompany\gestor_tutoriales\Categoria.class
-com\mycompany\gestor_tutoriales\resources\JavaEE8Resource.class
-Servlets\SvagregarTutorial.class
-com\mycompany\gestor_tutoriales\GestionarTutoriales.class
-Servlets\SvEliminarCategoria.class
 Servlets\SvEditarTutorial.class
+com\mycompany\gestor_tutoriales\resources\JavaEE8Resource.class
+com\mycompany\gestor_tutoriales\Tutorial.class
+Servlets\SvagregarTutorial.class
 com\mycompany\gestor_tutoriales\GestorCategoria.class
